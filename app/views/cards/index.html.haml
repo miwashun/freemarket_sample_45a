@@ -7,6 +7,18 @@
       .card-content__main
         .card-content__main__single クレジットカード一覧
         -if @card
+          %ul.card-content__main__settings
+            %li
+              %form.l-single-content{action: "", method: "POST"}
+                %figure
+                  %img{src: "https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?3703742561", width: "49", height: "15", alt: "visa"}
+                .card-content__main__settings__payment-num
+                  ************4242
+                .card-content__main__settings__payment-num
+                  12 / 20
+                %input{type: "hidden", name: "method", value: "card"}
+                %button.card-content__main__settings__payment-remove{type: "submit"}
+                  削除する
         -else
           .card-content__main__second
             .l-single-content
