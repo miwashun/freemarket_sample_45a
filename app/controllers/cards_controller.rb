@@ -13,17 +13,20 @@ class CardsController < ApplicationController
   end
 
   def create
-    Payjp.api_key = PAYJP_SECRET_KEY
-    customer = Payjp::Customer.create(
-      description: 'test'
-      )
-    @card = customer.cards.create(
-      card: params["payjp-token"]
-      )
-    Card.create(user_id: params["user_id"], customer_id: customer["id"])
+    # Payjp.api_key = PAYJP_SECRET_KEY
+    # customer = Payjp::Customer.create(
+    #   description: 'test'
+    #   )
+    # @card = customer.cards.create(
+    #   card: params["payjp-token"]
+    #   )
+    # Card.create(user_id: params["user_id"], customer_id: customer["id"])
   end
 
   def destroy
-
+    card = Card.find_by(user_id: params["user_id"])
+    # if tweet.user_id == current_user.id
+    card.destroy
+    redirect_to  user_cards_path
   end
 end

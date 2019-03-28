@@ -3,7 +3,7 @@
 %main.container-main
   %section.chapter-container
     %h2.chapter-container__head クレジットカード情報入力
-    %form#add-card-form.chapter-container__inner{action: "https://www.mercari.com/jp/mypage/card/add/", data: { adyen: { id: "card-form"}}, novalidate: "novalidate"}
+    %form#add-card-form.chapter-container__inner{action: "/users/#{params["user_id"]}/cards", method: "POST"}
       .l-single-content
         .form-group
           %label{for: "payment_card_no"} カード番号
@@ -74,7 +74,7 @@
         %input#encrypted_card_data{name: "encrypted_card_data", type: "hidden"}/
         %p#primary-error.has-error-text
         %input{name: "after_save_callback", type: "hidden", value: ""}/
-        %button#submit-button.btn-default.btn-red{type: "button"} 追加する
+        %button#submit-button.btn-default.btn-red{type: "submit"} 追加する
     %form{action: "/users/#{params["user_id"]}/cards", method: "POST"}
       %script.payjp-button{type: "text/javascript", src: "https://checkout.pay.jp/", "data-key": "#{PAYJP_PUBLIC_KEY}", "data-text": "追加する", "data-submit-text": "追加する"}
   = render 'users/sidebar'
