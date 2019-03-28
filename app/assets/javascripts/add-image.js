@@ -19,7 +19,7 @@ $(function() {
 $(document).on('turbolinks:load', function() {
     preview = $(".sell__upload__items__container");
     inputnum = 0
-    deletenum = 0
+    deletenum = 1
     number = 0
     function buildImageHTML(file){
             var html =
@@ -37,11 +37,10 @@ $(document).on('turbolinks:load', function() {
                 $('.sell__upload__drop-box.have__item-'+ inputnum +'').css('display','none')
                     inputnum +=1;
                 $('.sell__upload__drop-box.have__item-'+ deletenum +'').css('display','block')
-                    deletenum +=1
+                    deletenum -=1
       };
 
     $('form').on('change', 'input[type="file"]',function(e) {
-        console.log(e)
         var file = e.target.files[0],
             reader = new FileReader(),
             $preview = $(".sell__upload__items");
