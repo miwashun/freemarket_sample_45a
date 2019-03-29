@@ -27,11 +27,23 @@ body{
         width: 700px;
         margin: 0 auto;
         background-color:$white;
+        &__banner{
+          padding: 24px 8px;
+          text-align: center;
+          background-color: $background-orange;
+          &__title{
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 1.5;
+            color: $red;
+          }
+        }
         &__head{
           padding: 24px 8px;
           font-size: 18px;
           line-height: 1.5;
           text-align: center;
+          font-weight: bold;
         }
         &__content{
           margin: 0;
@@ -71,53 +83,6 @@ body{
                 display: inline-block;
               }
             }
-            &__point{
-              background-color:$key-gray;
-              margin: 16px 0 0;
-              list-style: none;
-              &__toggle{
-                cursor: default;
-                padding: 16px;
-                border: 1px solid $key-gray;
-                position: relative;
-              }
-            }
-            &__price{
-              display: table;
-              border-collapse: collapse;
-              width: 100%;
-              list-style: none;
-              &__details{
-                border: 0;
-                font-size: 22px;
-                display: table-row;
-                font-weight: 600;
-                .price-cell:first-child{
-                  text-align: left;
-                }
-                .price-cell{
-                  display: table-cell;
-                  padding: 16px 0;
-                  text-align: right;
-                }
-              }
-            }
-            &__button{
-              margin: 16px 0 0;
-              background-color: $red;
-              border: 1px solid $red;
-              color: $white;
-              display: block;
-              width: 100%;
-              line-height: 48px;
-              font-size: 14px;
-              transition: all ease-out .3s;
-              cursor: pointer;
-              text-align: center;
-              font-weight: 600;
-              min-height: 1.5em;
-              outline: 0;
-            }
           }
         }
         &__user-address{
@@ -149,15 +114,6 @@ body{
                 @extend .purchase__user-address__inner__text__postal-code;
               }
             }
-            &__fix{
-              display: block;
-              text-align: right;
-              color: $blue;
-              text-decoration: none;
-              span{
-                vertical-align: middle;
-              }
-            }
           }
         }
         &__pay-method{
@@ -184,14 +140,22 @@ body{
                 @extend .purchase__pay-method__inner__text__num;
               }
             }
-            &__fix{
-              display: block;
-              text-align: right;
-              color: $blue;
-              text-decoration: none;
-              span{
-                vertical-align: middle;
-              }
+          }
+        }
+        &__description{
+          padding: 24px 8px;
+          text-align: center;
+          &__title{
+            font-weight: bold;
+          }
+          &__detail{
+          }
+          &__link{
+            display: block;
+            color: $blue;
+            text-decoration: none;
+            span{
+              vertical-align: middle;
             }
           }
         }

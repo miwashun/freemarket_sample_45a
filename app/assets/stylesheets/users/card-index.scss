@@ -15,86 +15,123 @@
        font-size: 24px;
        padding: 8px 24px;
        display: block;
-      font-weight: bold;
-      line-height: 1.4;
-      border-bottom: 1px solid $body-gray;
-      text-align: center;
+       font-weight: bold;
+       line-height: 1.4;
+       border-bottom: 1px solid $body-gray;
+       text-align: center;
+     }
+     &__main{
+      padding: 64px;
+      line-height: 14px;
+      border-top: 1px solid $body-gray;
+      height: 308px;
+      &__single{
+        margin: auto;
+        max-width: 320px;
+        font-weight: bold;
+        font-size: 16px;
       }
-      &__main{
-        padding: 64px;
-        line-height: 14px;
-        border-top: 1px solid $body-gray;
-        height: 308px;
-        &__single{
-          margin: auto;
-          max-width: 320px;
-          font-weight: bold;
-          font-size: 16px;
-        }
-        &__second{
+      &__settings{
+        list-style: none;
+        li{
           padding: 24px 0;
-          border-bottom: 1px solid $border-gray;
-          height: 107px;
-          width: 572px;
+          border-bottom: 1px solid $whit-grays;
           .l-single-content{
-            margin: auto;
-            width: 320px;
-            background-color: $red;
-            color: white;
-            line-height: 48px;
-            font-size: 14px;
+           position: relative;
+           max-width: 320px;
+           margin: 0 auto;
+           img{
+            vertical-align: middle;
+          }
+          input{
+            border: 0;
+            outline: 0;
+            font-family: inherit;
+          }
+          .card-content__main__settings__payment-num{
+            margin: 8px 0 0;
+            font-size: 16px;
+          }
+          .card-content__main__settings__payment-remove{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 4px 6px;
+            background: $white;
+            border-radius: 3px;
+            border: 1px solid $red;
+            color: $red;
+            min-height: 1.5em;
+            outline: 0;
             cursor: pointer;
-            text-align: center;
-            display: block;
-            .btn-default{
-              margin-bottom: 8px !important;
-              background: #ea352d;
-              border: 1px solid $red;
-              color: #fff;
-              margin: 0;
-              text-align: center;
-              display: block;
-              width: 100%;
-              line-height: 48px;
-              font-size: 14px;
-              transition: all ease-out .3s;
-              cursor: pointer;
-              text-decoration: none;
-              .far{
-                margin-right: 16px;
-                font-size: 16px;
-                font-family: FontAwesome;
-                font-style:normal;
-               }
-            }
-          }
-        }
-        &__bottom{
-          display: block;
-          .btn-root{
-            display: block;
-            margin: 40px 0 0;
-            float: right;
-            text-align: right;
-            display: inline-flex;
-            line-height: 24px;
-            color: #0099e8;
-            text-decoration: none;
-          &:hover {
-            opacity: 0.7;
-          }
-            span:hover {
-              text-decoration: underline;
-            }
-              .fa-angle-right {
-              margin-left: 5px;
-              font-size: 24px;
-              font-family: FontAwesome;
-              font-style:normal;
-            }
           }
         }
       }
     }
+    &__second{
+      padding: 24px 0;
+      border-bottom: 1px solid $border-gray;
+      height: 107px;
+      width: 572px;
+      .l-single-content{
+        margin: auto;
+        width: 320px;
+        background-color: $red;
+        color: white;
+        line-height: 48px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        display: block;
+        .btn-default{
+          margin-bottom: 8px !important;
+          background: #ea352d;
+          border: 1px solid $red;
+          color: #fff;
+          margin: 0;
+          text-align: center;
+          display: block;
+          width: 100%;
+          line-height: 48px;
+          font-size: 14px;
+          transition: all ease-out .3s;
+          cursor: pointer;
+          text-decoration: none;
+          .far{
+            margin-right: 16px;
+            font-size: 16px;
+            font-family: FontAwesome;
+            font-style:normal;
+          }
+        }
+      }
+    }
+    &__bottom{
+      display: block;
+      .btn-root{
+        display: block;
+        margin: 40px 0 0;
+        float: right;
+        text-align: right;
+        display: inline-flex;
+        line-height: 24px;
+        color: #0099e8;
+        text-decoration: none;
+        &:hover {
+          opacity: 0.7;
+        }
+        span:hover {
+          text-decoration: underline;
+        }
+        .fa-angle-right {
+          margin-left: 5px;
+          font-size: 24px;
+          font-family: FontAwesome;
+          font-style:normal;
+        }
+      }
+    }
   }
+}
+}
 }
