@@ -1,5 +1,6 @@
 = render 'items/header'
 = render 'items/header-nav'
+/-binding.pry
 %main.card-box
   .card
     .card-content
@@ -10,12 +11,16 @@
           %ul.card-content__main__settings
             %li
               %form.l-single-content{action: "/users/#{current_user.id}/cards/1", method: "POST"}
-                %figure
-                  %img{src: "https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?3703742561", width: "49", height: "15", alt: "visa"}
+                -if @card.brand == "Visa"
+                  %figure
+                    %img{src: "https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?3703742561", width: "49", height: "15", alt: "visa"}
+                -else
+                  %figure
+                    %img{src: "", width: "49", height: "15", alt: @card.brand}
                 .card-content__main__settings__payment-num
-                  ************4242
+                  = "************#{@card.last4}"
                 .card-content__main__settings__payment-num
-                  12 / 20
+                  = "#{@card.exp_month} / #{@last2_year}"
                 %input{type: "hidden", name: "_method", value: "DELETE"}
                 %button.card-content__main__settings__payment-remove{type: "submit"}
                   削除する

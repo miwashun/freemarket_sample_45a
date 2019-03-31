@@ -6,6 +6,7 @@ class CardsController < ApplicationController
       Payjp.api_key = PAYJP_SECRET_KEY
       customer = Payjp::Customer.retrieve(card["customer_id"])
       @card = customer.cards.retrieve(customer["default_card"])
+      @last2_year = @card["exp_year"] % 100
     end
   end
 
@@ -13,14 +14,17 @@ class CardsController < ApplicationController
   end
 
   def create
-    # Payjp.api_key = PAYJP_SECRET_KEY
-    # customer = Payjp::Customer.create(
-    #   description: 'test'
-    #   )
-    # @card = customer.cards.create(
-    #   card: params["payjp-token"]
-    #   )
-    # Card.create(user_id: params["user_id"], customer_id: customer["id"])
+    Payjp.api_key = PAYJP_SECRET_KEY
+    customer = Payjp::Customer.create(
+      description: 'test'
+      )
+    @card = customer.cards.create(
+      card: params["payjpToken"],
+      default: true
+      )
+    Card.create(user_id: params["user_id"], customer_id: customer["id"])
+
+    redirect_to  user_cards_path
   end
 
   def destroy
