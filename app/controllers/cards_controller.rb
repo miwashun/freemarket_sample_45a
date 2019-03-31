@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  before_action :
   protect_from_forgery except: :create
   def index
     card = Card.find_by(user_id: params["user_id"])
@@ -33,4 +34,10 @@ class CardsController < ApplicationController
     card.destroy
     redirect_to  user_cards_path
   end
+
+  private
+  def before_login
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
 end

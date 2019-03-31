@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :before_login, except:[:index, :show]
+
   protect_from_forgery except: :done
   def index
     @ladies_items = Item.includes(:images).where(category_id: 1).order(created_at: :desc).limit(4)
@@ -26,15 +28,18 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      flash[:alert] = '※必須項目を入力してください'
       render "new"
     end
   end
 
   def edit
     @item = Item.find(params[:id])
-    @image = @item.images.includes(:image_url)
-    @item.images.build
+    if current_user.id == @item.user_id
+      @image = @item.images.includes(:image_url)
+      @item.images.build
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -42,6 +47,8 @@ class ItemsController < ApplicationController
     if item.user_id == current_user.id
       item.destroy
       redirect_to root_path, notice: "商品を削除しました"
+    else
+      redirect_to root_path
     end
   end
 
@@ -50,7 +57,7 @@ class ItemsController < ApplicationController
     if @item.update(update_item_params)
       redirect_to user_path
     else
-      render :create
+      render :edit
     end
   end
 
@@ -87,6 +94,10 @@ class ItemsController < ApplicationController
   end
 
   private
+  def before_login
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
   def item_params
     params.require(:item).permit(:name, :price, :detail, :category_id, :subcategory_id, :subsubcategory, :prefecture_id, :condition_id, :shipping_date_id, :burden_id, images_attributes: [:id, :image_url]).merge(user_id: current_user.id)
   end
