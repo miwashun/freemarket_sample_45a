@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_072736) do
+ActiveRecord::Schema.define(version: 2019_03_30_164358) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "zip", limit: 7
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_072736) do
     t.integer "condition_id"
     t.integer "shipping_date_id"
     t.integer "burden_id"
+    t.integer "status", default: 0, null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
