@@ -12,14 +12,14 @@
       %section.purchase__content
         .purchase__content__inner
           %h3
-            = image_tag "briefcase.png", alt: "サンプル画像",class: "purchase__content__inner__image"
+            - @item.images.each do |image|
+              = image_tag "#{image.image_url}", alt: "サンプル画像",class: "purchase__content__inner__image"
           %p.purchase__content__inner__name
-            ビジネスバッグ
-          %form{action: "/items/#{@id}/done", method: "POST", class: "purchase__content__inner__form"}
-            %p.purchase__content__inner__form__item-price
-              ¥ 500
-              %span.purchase__content__inner__form__item-price__shipping-fee
-                送料込み
+            = @item.name
+          %p.purchase__content__inner__form__item-price
+            ="¥ #{@item.price}"
+            %span.purchase__content__inner__form__item-price__shipping-fee
+              送料込み
       %section.purchase__user-address
         .purchase__user-address__inner
           %h3
@@ -37,9 +37,16 @@
             支払い方法
           .purchase__pay-method__inner__text
             .purchase__pay-method__inner__text__num
-              ************3333
+              = "************#{@card.last4}"
             .purchase__pay-method__inner__text__date
-              01/01
+              = "#{@card.exp_month} / #{@last2_year}"
+            .purchase__pay-method__inner__text__card
+              -if @card.brand == "Visa"
+                %figure
+                  %img{src: "https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?3703742561", width: "49", height: "15", alt: "visa"}
+              -else
+                %figure
+                  %img{src: "", width: "49", height: "15", alt: @card.brand}
       %section.purchase__description
         %h2.purchase__description__title
           発送通知後の流れ
@@ -51,7 +58,7 @@
           購入代金が出品者に振り込まれます。
           %br
           評価後に取引は完了です。
-        = link_to 'https://www.mercari.com/jp/', class: "purchase__description__link" do
+        = link_to "/users/#{@user.id}", class: "purchase__description__link" do
           %span
             マイページへ戻る
   = render 'footer-buy'

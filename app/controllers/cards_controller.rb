@@ -23,13 +23,11 @@ class CardsController < ApplicationController
       default: true
       )
     Card.create(user_id: params["user_id"], customer_id: customer["id"])
-
     redirect_to  user_cards_path
   end
 
   def destroy
     card = Card.find_by(user_id: params["user_id"])
-    # if tweet.user_id == current_user.id
     card.destroy
     redirect_to  user_cards_path
   end

@@ -41,19 +41,27 @@
             .purchase__user-address__inner__text__name
               未来 太郎
           %p.purchase__user-address__inner__text
-          = link_to 'https://www.mercari.com/jp/', class: "purchase__user-address__inner__fix" do
+          = link_to '', class: "purchase__user-address__inner__fix" do
             %span
               変更する
       %section.purchase__pay-method
         .purchase__pay-method__inner
           %h3
             支払い方法
-          .purchase__pay-method__inner__text
-            .purchase__pay-method__inner__text__num
-              ************3333
-            .purchase__pay-method__inner__text__date
-              01/01
-          = link_to 'https://www.mercari.com/jp/', class: "purchase__pay-method__inner__fix" do
+          -if @card
+            .purchase__pay-method__inner__text
+              .purchase__pay-method__inner__text__num
+                = "************#{@card.last4}"
+              .purchase__pay-method__inner__text__date
+                = "#{@card.exp_month} / #{@last2_year}"
+              .purchase__pay-method__inner__text__card
+                -if @card.brand == "Visa"
+                  %figure
+                    %img{src: "https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?3703742561", width: "49", height: "15", alt: "visa"}
+                -else
+                  %figure
+                    %img{src: "", width: "49", height: "15", alt: @card.brand}
+          = link_to "/users/#{@user.id}/cards", class: "purchase__pay-method__inner__fix" do
             %span
               変更する
   = render 'footer-buy'

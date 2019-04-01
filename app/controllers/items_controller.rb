@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :before_login, except:[:index, :show]
-  before_action :set_item, only:[:edit, :update, :destroy, :show]
+  before_action :set_item, only:[:edit, :update, :destroy, :show, :purchase, :done]
 
   protect_from_forgery except: :done
   def index
@@ -63,17 +63,32 @@ class ItemsController < ApplicationController
   end
 
   def purchase
-    @item = Item.find(params[:id])
+    @user = User.find(current_user.id)
+    card = Card.find_by(user_id: current_user.id)
+    if card.present?
+      Payjp.api_key = PAYJP_SECRET_KEY
+      customer = Payjp::Customer.retrieve(card["customer_id"])
+      @card = customer.cards.retrieve(customer["default_card"])
+      @last2_year = @card["exp_year"] % 100
+    end
   end
 
   def done
-    Payjp.api_key = PAYJP_SECRET_KEY
-    @card =Card.find_by(user_id: params[:id])
-    charge = Payjp::Charge.create(
-      :amount => 500,
-      :currency => 'jpy',
-      :customer => @card.customer_id
-      )
+    @user = User.find(current_user.id)
+    card =Card.find_by(user_id: current_user.id)
+    if card.present?
+      Payjp.api_key = PAYJP_SECRET_KEY
+      charge = Payjp::Charge.create(
+        :amount => @item.price,
+        :currency => 'jpy',
+        :customer => card.customer_id
+        )
+      customer = Payjp::Customer.retrieve(card["customer_id"])
+      @card = customer.cards.retrieve(customer["default_card"])
+      @last2_year = @card["exp_year"] % 100
+    else
+      redirect_to purchase_item_path
+    end
   end
 
   def search
