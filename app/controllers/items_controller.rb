@@ -63,8 +63,6 @@ class ItemsController < ApplicationController
 
   def purchase
     @item = Item.find(params[:id])
-    # @id = params[:id]
-    # binding.pry
   end
 
   def done

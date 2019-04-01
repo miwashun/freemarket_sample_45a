@@ -68,6 +68,13 @@
         .view-all
           = link_to items_path do
             すべての商品を見る
-
+        %h3.box__title
+           = link_to items_path do
+            ナイキ 新着アイテム
+        .box__content
+          = render @nike_items
+        .view-all
+          = link_to items_path do
+            すべての商品を見る
   = render 'footer'
   = render 'footer-sell-btn'
