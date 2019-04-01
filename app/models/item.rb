@@ -10,5 +10,9 @@ class Item < ApplicationRecord
   belongs_to_active_hash :condition
   belongs_to_active_hash :shipping_date
   belongs_to_active_hash :burden
+
+  enum status: {published: 0, stopped: 1, trading: 2, sold: 3}
+  
+  validates :images, length: { minimum: 1, maximum: 10 }
 end
 
