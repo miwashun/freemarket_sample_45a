@@ -1,5 +1,4 @@
 class CardsController < ApplicationController
-  before_action :
   protect_from_forgery except: :create
   def index
     card = Card.find_by(user_id: params["user_id"])
