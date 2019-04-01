@@ -63,7 +63,7 @@ class ItemsController < ApplicationController
   end
 
   def purchase
-    @id = params[:id]
+    @item = Item.find(params[:id])
   end
 
   def done
