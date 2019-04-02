@@ -19,20 +19,20 @@
             .form-box__width
               %label.form-box__label パスワード
               %span.form-box__label-req 必須
-              = f.text_field :password, class:'user-form', placeholder:"6文字以上"
+              = f.password_field :password, class:'user-form', placeholder:"6文字以上"
             .form-box__width
               %label.form-box__label パスワード（確認）
               %span.form-box__label-req 必須
-              = f.text_field :password_confirmation, class:'user-form', placeholder:"6文字以上"
+              = f.password_field :password_confirmation, class:'user-form', placeholder:"6文字以上"
           - else
             .form-box__width{style: 'display: none;'}
               %label.form-box__label パスワード
               %span.form-box__label-req 必須
-              = f.text_field :password, class:'user-form', placeholder:"6文字以上", value: "password"
+              = f.password_field :password, class:'user-form', placeholder:"6文字以上", value: "password", autocomplete: "off"
             .form-box__width{style: 'display: none;'}
               %label.form-box__label パスワード（確認）
               %span.form-box__label-req 必須
-              = f.text_field :password_confirmation, class:'user-form', placeholder:"6文字以上", value: "password"
+              = f.password_field :password_confirmation, class:'user-form', placeholder:"6文字以上", value: "password", autocomplete: "off"
               = f.hidden_field :uid
               = f.hidden_field :provider
           .form-box__text
