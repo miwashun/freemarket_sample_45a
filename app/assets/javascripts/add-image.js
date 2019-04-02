@@ -16,7 +16,7 @@ $(function() {
     readURL(this);
     });
 });
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
     preview = $(".sell__upload__items__container");
     inputnum = 0
     deletenum = 1

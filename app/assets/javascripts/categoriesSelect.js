@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
 
   // Mカテゴリーのselectを追加するHTML
   var cat_seach = $("#cat");

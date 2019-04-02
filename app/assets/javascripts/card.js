@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load',function() {
+$(document).ready(function() {
   var form = $("#add-card-form");
   var number = form.find('#payment_card_no');
   var cvc = form.find('#payment_card_security_code');
