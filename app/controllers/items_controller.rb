@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
   before_action :before_login, except:[:index, :show]
   before_action :set_item, only:[:edit, :update, :destroy, :show, :purchase, :done]
-
+  before_action :set_user, only:[:purchase, :done]
   protect_from_forgery except: :done
+
   def index
     @ladies_items = Item.includes(:images).where(category_id: 1).order(created_at: :desc).limit(4)
     @mens_items = Item.includes(:images).where(category_id: 2).order(created_at: :desc).limit(4)
@@ -63,7 +64,6 @@ class ItemsController < ApplicationController
   end
 
   def purchase
-    @user = User.find(current_user.id)
     card = Card.find_by(user_id: current_user.id)
     if card.present?
       Payjp.api_key = PAYJP_SECRET_KEY
@@ -74,7 +74,6 @@ class ItemsController < ApplicationController
   end
 
   def done
-    @user = User.find(current_user.id)
     card =Card.find_by(user_id: current_user.id)
     if card.present?
       Payjp.api_key = PAYJP_SECRET_KEY
@@ -86,6 +85,8 @@ class ItemsController < ApplicationController
       customer = Payjp::Customer.retrieve(card["customer_id"])
       @card = customer.cards.retrieve(customer["default_card"])
       @last2_year = @card["exp_year"] % 100
+
+      @item.sold!
     else
       redirect_to purchase_item_path
     end
@@ -115,6 +116,11 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def set_user
+    @user = User.find(current_user.id)
+  end
+
   def item_params
     params.require(:item).permit(:name, :price, :detail, :category_id, :subcategory_id, :subsubcategory, :prefecture_id, :condition_id, :shipping_date_id, :burden_id, images_attributes: [:id, :image_url]).merge(user_id: current_user.id)
   end

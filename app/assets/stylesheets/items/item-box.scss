@@ -1,53 +1,95 @@
 .box__item{
-    margin: 0 0 20px 20px;
-    position: relative;
+  margin: 0 0 20px 20px;
+  position: relative;
+  display: inline-block;
+  background-color: $white;
+  max-height:330px;
+  max-width: 210px;
+  a{
     display: inline-block;
-    background-color: $white;
-    max-height:330px;
-    max-width: 210px;
-    a{
-      display: inline-block;
-      color: $ink;
-      text-decoration: none;
-      touch-action: manipulation;
-      .box__item__photo{
+    color: $ink;
+    text-decoration: none;
+    touch-action: manipulation;
+    .box__item__photo{
+      overflow: hidden;
+      position: relative;
+      width: 210px;
+      height: 220px;
+      margin: 0;
+      img{
+        width: 213px;
+        height: 213px;
+      }
+      &--soldout-badge{
+        position: absolute;
+        top: 0;
+        height: 0;
+        width: 0;
+        border: 60px solid transparent;
+        border-top-color: #ea352d;
+        border-left-color: #ea352d;
+        z-index: 30;
+      }
+      &--soldout{
+        text-align: center;
+        position: absolute;
+        top: 30px;
+        width: 85px;
+        z-index: 50;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        transform: rotate(-45deg);
+      }
+      &--stopped-badge{
+        position: absolute;
+        top: 0;
+        height: 0;
+        width: 0;
+        border: 60px solid transparent;
+        border-top-color: #888;
+        border-left-color: #888;
+        z-index: 30;
+      }
+      &--stopped{
+        text-align: center;
+        position: absolute;
+        top: 30px;
+        width: 85px;
+        z-index: 50;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        transform: rotate(-45deg);
+      }
+    }
+    .box__item__body{
+      padding: 16px;
+      height: 110px;
+      &__name{
         overflow: hidden;
         position: relative;
-        width: 210px;
-        height: 220px;
+        font-weight: 400;
+        height: 3em;
+        line-height: 1.5;
+        word-break: break-word;
+        white-space: normal;
+        font-size: 16px;
+        color: $ink;
         margin: 0;
-        img{
-          width: 213px;
-          height: 213px;
-        }
       }
-      .box__item__body{
-        padding: 16px;
-        height: 110px;
-        &__name{
-          overflow: hidden;
-          position: relative;
-          font-weight: 400;
-          height: 3em;
-          line-height: 1.5;
-          word-break: break-word;
-          white-space: normal;
-          font-size: 16px;
+      &__num{
+        margin: 0;
+        &__price{
+          float: left;
+          font-weight: 600;
           color: $ink;
-          margin: 0;
         }
-        &__num{
-          margin: 0;
-          &__price{
-            float: left;
-            font-weight: 600;
-            color: $ink;
-          }
-          &__tax{
-            font-size: 10px;
-            clear: both;
-          }
+        &__tax{
+          font-size: 10px;
+          clear: both;
         }
       }
     }
   }
+}

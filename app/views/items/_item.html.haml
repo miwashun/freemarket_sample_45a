@@ -2,6 +2,14 @@
   = link_to item_path(id: item.id) do
     %figure.box__item__photo
       = image_tag item.images.first.image_url.url
+      - if item.sold?
+        .box__item__photo--soldout-badge
+        .box__item__photo--soldout
+          SOLD
+      - elsif item.stopped?
+        .box__item__photo--stopped-badge
+        .box__item__photo--stopped
+          出品停止中
     .box__item__body
       %h3.box__item__body__name
         = item.name
