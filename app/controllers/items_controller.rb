@@ -85,6 +85,8 @@ class ItemsController < ApplicationController
       customer = Payjp::Customer.retrieve(card["customer_id"])
       @card = customer.cards.retrieve(customer["default_card"])
       @last2_year = @card["exp_year"] % 100
+
+      @item.sold!
     else
       redirect_to purchase_item_path
     end

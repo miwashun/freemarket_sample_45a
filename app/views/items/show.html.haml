@@ -10,6 +10,14 @@
           - @item.images.each do |image|
             .item__content__image__top
               = image_tag "#{image.image_url}"
+              - if @item.sold?
+                .item__content__image__top--soldout-badge
+                .item__content__image__top--soldout
+                  SOLD
+              - elsif @item.stopped?
+                .item__content__image__top--stopped-badge
+                .item__content__image__top--stopped
+                  出品停止中
         %table.item__content__table
           %tbody
             %tr
@@ -47,7 +55,7 @@
                 =@item.condition.name
             %tr
               %th 配送料の負担
-              %td 
+              %td
                 = @item.burden.name
             %tr
               %th 配送の方法
@@ -59,7 +67,7 @@
                   = @item.prefecture.name
             %tr
               %th 発送の目安
-              %td 
+              %td
                 = @item.shipping_date.name
       .item__price
         %span.item__price--bold
@@ -67,8 +75,12 @@
         %span.item__price__tax (税込)
         %span.item__price__shipping-fee 送料込み
         .item__btn
-          = link_to purchase_item_path do
-            購入画面に進む
+          - if @item.published?
+            = link_to purchase_item_path do
+              購入画面に進む
+          - else
+            .item__btn--soldout
+              売り切れました
       .item__description
         %p.item__description--inner
           = @item.detail
