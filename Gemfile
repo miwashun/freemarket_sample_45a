@@ -51,6 +51,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'faker'
+  gem 'gimei'
 end
 
 group :development do
@@ -94,3 +95,4 @@ gem 'jquery-validation-rails'
 gem 'gretel'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+
